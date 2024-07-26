@@ -95,6 +95,7 @@ class MainWindow(QMainWindow):
             print("Task completed!")
 
     def removeImages(self):
+        self.IP.determineImagesWithPerson()
         self.IP.removeImages()
 
     def blurImages(self):
