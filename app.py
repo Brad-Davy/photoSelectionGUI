@@ -1,7 +1,8 @@
 import sys
 from PyQt6.QtCore import QSize, Qt, QTimer, pyqtSignal, QObject
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLineEdit, QProgressDialog
-from imageProcessing import IP  # Assume this is your custom module
+from image_processing import IP  
+from image_input_output_google_drive import download_images, upload_images
 import threading
 import time
 
@@ -24,35 +25,29 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Photo Processing GUI")
-        self.setFixedSize(QSize(600, 200))
+        self.setFixedSize(QSize(300, 300))
         self.UiComponents()
         self.IP = IP()
         self.yoloThread = Parallel(self.IP)
         self.yoloThread.progress.connect(self.update_progress)
+        self.setStyleSheet("background-color: gray;")
 
     def UiComponents(self): 
-        button = QPushButton("Set Image File", self) 
-        button.setGeometry(350, 30, 100, 30)
-        button.clicked.connect(self.setImageFile)
-
-        #button = QPushButton("Run YOLO Algorithm", self) 
-        #button.setGeometry(350, 60, 150, 30)
-        #button.clicked.connect(self.determineImages) 
+        button = QPushButton("Download Images", self) 
+        button.setGeometry(75, 30, 150, 30)
+        button.clicked.connect(download_images)
 
         button = QPushButton("Remove Images", self) 
-        button.setGeometry(350, 60, 150, 30)
+        button.setGeometry(75, 80, 150, 30)
         button.clicked.connect(self.removeImages)
 
         button = QPushButton("Blur Images", self) 
-        button.setGeometry(350, 90, 150, 30)
+        button.setGeometry(75, 130, 150, 30)
         button.clicked.connect(self.blurImages) 
 
-        #button = QPushButton("Test", self) 
-        #button.clicked.connect(self.start_task) 
-        #button.setGeometry(350, 150, 150, 30)
-
-        self.lineEdit = QLineEdit(self)
-        self.lineEdit.setGeometry(30, 30, 250, 30)
+        button = QPushButton("Upload Images", self) 
+        button.setGeometry(75, 180, 150, 30)
+        button.clicked.connect(upload_images) 
 
     def setImageFile(self):
         filePath = self.lineEdit.text()
