@@ -1,7 +1,14 @@
-![Photo_Selection_GUI](https://github.com/user-attachments/assets/6723d9da-f86c-4e6c-a2dd-3cfdf0fcf4c6)
+![Photo_Selection_GUI (1)](https://github.com/user-attachments/assets/1497bae7-fbed-4449-b5ee-0793184fc201)
 
-A graphical user interface developed in Python to download images from a Google drive, process them and then re-upload them to another Google drive.
+# Overview
+A graphical user interface developed in Python to download images from a Google Drive, process them and then re-upload them to another Google Drive.
 
+# Install
+- > git clone git@github.com:Brad-Davy/photoSelectionGUI.git
+- > python3 -m venv env
+- > source env/activate/bin
+- > pip3 install -r requirements.txt
 
 # Usage
-> git clone
+Run the app by executing 
+> python3 app.py
