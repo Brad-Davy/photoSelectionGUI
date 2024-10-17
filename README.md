@@ -12,3 +12,10 @@ A graphical user interface developed in Python to download images from a Google 
 # Usage
 Run the app by executing 
 > python3 app.py
+
+The following window should open. 
+
+![Screenshot 2024-10-17 at 12 12 16](https://github.com/user-attachments/assets/5885c496-54bc-4e7f-a149-af4cb09f2582)
+
+First, select the 'Download Images' button. This will open the following window.
+
