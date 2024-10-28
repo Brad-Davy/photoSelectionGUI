@@ -1,10 +1,8 @@
-PyQt3D==5.15.6
-PyQt5==5.15.10
-PyQt5_sip==12.13.0
-PyQtChart==5.15.6
-PyQtDataVisualization==5.15.5
-PyQtNetworkAuth==5.15.5
-PyQtPurchasing==5.15.5
-PyQtWebEngine==5.15.6
-TBB==0.2
-wheel @ file:///usr/local/Cellar/python%403.12/3.12.4/libexec/wheel-0.43.0-py3-none-any.whl#sha256=ff23205a590f2b902a2a21151019e96b93ab4a1409d7c9748b6bd210f4c0f44d
+numpy
+torch
+pyqt6
+ultralytics
+opencv-python
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

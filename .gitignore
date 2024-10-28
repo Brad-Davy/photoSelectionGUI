@@ -1,3 +1,4 @@
 temporary_image_directory/*
 token.json
 credentials.json
+env/*
