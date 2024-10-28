@@ -1,6 +1,7 @@
 numpy
 torch
 pyqt6
+
 ultralytics
 opencv-python
 google-api-python-client
