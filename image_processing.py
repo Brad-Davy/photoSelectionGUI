@@ -17,7 +17,7 @@ class IP:
         self.IMAGES_TO_REMOVE = []
         self.IMAGES_HAVE_BEEN_REMOVED = False
 
-    def setImagePath(self, imagePath):
+    def set_image_path(self, imagePath):
         self.PATH_TO_IMAGES = imagePath
 
     def getImagePath(self, imagePath):

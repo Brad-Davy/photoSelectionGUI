@@ -10,6 +10,12 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 
 
 def check_if_temporary_image_directory_exists():
+
+    ############################################################
+    # Check if the temporary image directrory exists, if not
+    # install it.
+    ############################################################ 
+
     if os.path.isdir('temporary_image_directory'):
         return 
     else:

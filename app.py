@@ -16,7 +16,7 @@ class Parallel(QObject):
     def work(self):
         print('this worked')
         for i in range(101):
-            self.IP.determineImagesWithPerson()
+            self.IP.determine_images_with_person()
             self.progress.emit(i)  # Emit progress signal
             time.sleep(0.1)  # Simulate work
 
@@ -26,35 +26,35 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Photo Processing GUI")
         self.setFixedSize(QSize(300, 300))
-        self.UiComponents()
+        self.ui_components()
         self.IP = IP()
         self.yoloThread = Parallel(self.IP)
         self.yoloThread.progress.connect(self.update_progress)
         self.setStyleSheet("background-color: gray;")
 
-    def UiComponents(self): 
+    def ui_components(self): 
         button = QPushButton("Download Images", self) 
         button.setGeometry(75, 30, 150, 30)
         button.clicked.connect(download_images)
 
         button = QPushButton("Remove Images", self) 
         button.setGeometry(75, 80, 150, 30)
-        button.clicked.connect(self.removeImages)
+        button.clicked.connect(self.remove_images)
 
         button = QPushButton("Blur Images", self) 
         button.setGeometry(75, 130, 150, 30)
-        button.clicked.connect(self.blurImages) 
+        button.clicked.connect(self.blur_images) 
 
         button = QPushButton("Upload Images", self) 
         button.setGeometry(75, 180, 150, 30)
         button.clicked.connect(upload_images) 
 
-    def setImageFile(self):
+    def set_image_file(self):
         filePath = self.lineEdit.text()
         self.IP.setImagePath(filePath)
         print('Image path has been set too: {}'.format(filePath))
 
-    def determineImages(self):
+    def determine_images(self):
         progress_dialog = QProgressDialog("Task in progress...", "Cancel", 0, 100, self)
         progress_dialog.setWindowTitle("Progress")
         progress_dialog.setWindowModality(Qt.WindowModality.WindowModal)
@@ -89,12 +89,12 @@ class MainWindow(QMainWindow):
             QTimer.singleShot(500, self.progress_dialog.close)  # Close after 500 milliseconds
             print("Task completed!")
 
-    def removeImages(self):
-        self.IP.determineImagesWithPerson()
-        self.IP.removeImages()
+    def remove_images(self):
+        self.IP.determine_images_with_person()
+        self.IP.remove_images()
 
-    def blurImages(self):
-        self.IP.blurImages()
+    def blur_images(self):
+        self.IP.blur_images()
 
 app = QApplication(sys.argv)
 window = MainWindow()
