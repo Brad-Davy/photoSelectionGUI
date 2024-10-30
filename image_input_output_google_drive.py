@@ -8,6 +8,13 @@ import io
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
+
+def check_if_temporary_image_directory_exists():
+    if os.path.isdir('temporary_image_directory'):
+        return 
+    else:
+        os.system('mkdir temporary_image_directory')
+
 def check_and_create_credentials():
 
     creds = None
@@ -33,6 +40,7 @@ def check_and_create_credentials():
 def download_images():
 
     creds = check_and_create_credentials()
+    check_if_temporary_image_directory_exists()
 
     ############################################################ 
     # Create the service and list all files
@@ -78,15 +86,19 @@ def download_images():
 
 def upload_images():
 
-    creds = check_and_create_credentials()
-    service = build('drive', 'v3', credentials=creds)
-    folder_id = '1cIg47pxY1I2d8NqbbDEhGg64uAt8oS5L'
+    if os.path.isdir('temporary_image_directory'):
+        creds = check_and_create_credentials()
+        service = build('drive', 'v3', credentials=creds)
+        folder_id = '1cIg47pxY1I2d8NqbbDEhGg64uAt8oS5L'
 
-    all_file_names = os.listdir('temporary_image_directory')
-    print('{} files to upload.'.format(len(all_file_names)))
+        all_file_names = os.listdir('temporary_image_directory')
+        print('{} files to upload.'.format(len(all_file_names)))
 
-    for idx, file_name in enumerate(all_file_names):
-        media = MediaFileUpload('temporary_image_directory/'+file_name, mimetype='image/jpeg')
-        file_metadata = {'name': file_name.split('/')[-1], 'parents': [folder_id]}
-        file = service.files().create(body=file_metadata, media_body=media, fields='id, name').execute()
-        print('Upload 100% complete. {}/{}'.format(idx, len(all_file_names)))
+        for idx, file_name in enumerate(all_file_names):
+            media = MediaFileUpload('temporary_image_directory/'+file_name, mimetype='image/jpeg')
+            file_metadata = {'name': file_name.split('/')[-1], 'parents': [folder_id]}
+            file = service.files().create(body=file_metadata, media_body=media, fields='id, name').execute()
+            print('Upload 100% complete. {}/{}'.format(idx, len(all_file_names)))
+
+    else:
+        raise Exception('The temporary_image_directory does not exist.')
