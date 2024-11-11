@@ -49,6 +49,14 @@ class MainWindow(QMainWindow):
         button.setGeometry(75, 180, 150, 30)
         button.clicked.connect(upload_images) 
 
+        self.download_file_id_input = QLineEdit(self)
+        self.download_file_id_input.setPlaceholderText("Enter Download File ID")
+        self.download_file_id_input.setGeometry(75, 230, 150, 30)
+
+        self.upload_file_id_input = QLineEdit(self)
+        self.upload_file_id_input.setPlaceholderText("Enter Upload File ID")
+        self.upload_file_id_input.setGeometry(75, 270, 150, 30)
+
     def set_image_file(self):
         filePath = self.lineEdit.text()
         self.IP.setImagePath(filePath)
@@ -100,3 +108,5 @@ app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
 app.exec()
+
+

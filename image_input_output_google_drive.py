@@ -8,6 +8,10 @@ import io
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
 
+############################################################
+# This function checks if the temporary image directory exists
+# and if not creates it.
+############################################################
 
 def check_if_temporary_image_directory_exists():
 
@@ -20,6 +24,12 @@ def check_if_temporary_image_directory_exists():
         return 
     else:
         os.system('mkdir temporary_image_directory')
+
+############################################################
+# This function checks if the credentials have been set, if not 
+# it will create them and save them to a file called 'token.json' 
+# in the current directory.
+############################################################
 
 def check_and_create_credentials():
 
@@ -42,6 +52,13 @@ def check_and_create_credentials():
             token.write(creds.to_json())
 
     return creds
+
+
+############################################################
+# This function downloads all images from the google drive
+# folder with the id '1f2yYNOfnpNtXnlFSvjDJ4DwIq551FD1f'
+# and saves them to the local directory 'temporary_image_directory'.
+############################################################
 
 def download_images():
 
@@ -90,6 +107,13 @@ def download_images():
             status, done = downloader.next_chunk()
             print("Download {}% complete. {}/{}".format(int(status.progress() * 100), idx, len(image_names)))
 
+
+############################################################
+# This function uploads all images from the local directory
+# 'temporary_image_directory' to the google drive folder with
+# the id '1cIg47pxY1I2d8NqbbDEhGg64uAt8oS5L'.
+############################################################
+
 def upload_images():
 
     if os.path.isdir('temporary_image_directory'):
@@ -108,3 +132,5 @@ def upload_images():
 
     else:
         raise Exception('The temporary_image_directory does not exist.')
+    
+
