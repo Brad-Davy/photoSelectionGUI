@@ -6,13 +6,12 @@ import matplotlib.pyplot as plt
 #####################################
 ## Declarations 
 #####################################
-model = YOLO('yolov8n.pt')
-tensor_dict = {}
-zero_filenames = []  
 
 class IP:
-
     def __init__(self):
+        self.model = YOLO('yolov8n.pt')
+        self.tensor_dict = {}
+        self.zero_filenames = []  
         self.PATH_TO_IMAGES = "temporary_image_directory"
         self.IMAGES_TO_REMOVE = []
         self.IMAGES_HAVE_BEEN_REMOVED = False
@@ -30,13 +29,13 @@ class IP:
 
             try:
                 imagePath = os.path.join(self.PATH_TO_IMAGES, imagePath)
-                result = model(imagePath)
+                result = self.model(imagePath)
                 for r in result:
                     tensor = str(r.boxes.cls)
-                    if tensor not in tensor_dict:
-                        tensor_dict[tensor] = [imagePath]  # Initialize list for the tensor if not already present
+                    if tensor not in self.tensor_dict:
+                        self.tensor_dict[tensor] = [imagePath]  # Initialize list for the tensor if not already present
                     else:
-                        tensor_dict[tensor].append(imagePath)  # Append filename to the existing list
+                        self.tensor_dict[tensor].append(imagePath)  # Append filename to the existing list
                     if '0.' in tensor:  # Check if tensor does not have element 0
                         return imagePath
             except:
@@ -99,3 +98,6 @@ class IP:
             faceData = faceDetect.detectMultiScale(imageCv2Converted, 1.3, 5)  
             blurredImage = self.blurImageHelper(faceData, imageCv2Converted)
             cv2.imwrite(imagePath, blurredImage)
+
+if __name__ == '__main__':
+    pass
