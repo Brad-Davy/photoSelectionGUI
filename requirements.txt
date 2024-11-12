@@ -1,0 +1,11 @@
+numpy
+pyqt6
+ultralytics
+opencv-python
+google-api-python-client 
+google-auth-httplib2 
+google-auth-oauthlib
+numpy
+torch
+pyqt6
+
